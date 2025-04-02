@@ -1,32 +1,59 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Admin from "../pages/Admin";
+import User from "../pages/User";
 
 const Home = () => {
-  const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate("/about");
-  };
+    const [employee, setEmployee] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
-  return (
-    <div className="text-center">
-      <h1 className="text-3xl font-bold mb-4">Welcome to Our App</h1>
-      <button
-        onClick={handleNavigate}
-        className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
-      >
-        Go to About
-      </button>
-      <br />
-      <br />
-      <Link
-        to="/contact"
-        className="text-teal-600 underline hover:text-teal-800"
-      >
-        Go to Contact
-      </Link>
-    </div>
-  );
-};
+    const [sector, setSector] = useState('');
 
-export default Home;
+    const fetchUsers = async () => {
+        setError("");
+        setLoading(true);
+
+        try {
+            const res = await axios.get(
+                "https://jsd5-mock-backend.onrender.com/members"
+            );
+            setEmployee(res.data);
+            console.log(res.data)
+        } catch (err) {
+            console.error(err);
+            setError("Please try again later.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Initial Fetch data
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    return (
+        <div className="flex flex-col justify-center items-center mt-8 gap-8">
+            <section className="text-center">
+                <h1 className="text-4xl font-bold">Generation Thailand</h1>
+                <h2 className="text-4xl font-bold">{sector === 'user' ? 'Home - User Sector' : sector === 'admin' ? 'Home - Admin Sector' : 'React - Assessment'}</h2>
+            </section>
+            <div className="flex gap-8">
+
+                <button onClick={() => setSector('user')}>User Home Sector</button>
+                <button onClick={() => setSector('admin')}>Admin Home Sector</button>
+
+            </div>
+            {loading && <p>Loading users...</p>}
+            {error && <p>{error}</p>}
+            {sector === 'user' ? <User employee={employee} /> : null}
+            {sector === 'admin' ? <Admin employee={employee} fetchUsers={fetchUsers} setError={setError} /> : null}
+        </div>
+    )
+}
+
+
+
+export default Home
