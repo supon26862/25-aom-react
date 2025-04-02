@@ -4,6 +4,7 @@ import { products } from "../data/products";
 
 const ProductDetail = () => {
   const { productId } = useParams();
+
   const product = products.find((p) => p.id === productId);
 
   if (!product) {
