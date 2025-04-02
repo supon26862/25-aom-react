@@ -1,10 +1,7 @@
 import React from 'react';
-
-
 const User = ({ employee }) => {
-
     return (
-        <div className='w-3/4 mb-12'>
+        <div className='w-1/2 mb-10'>
             <table className='w-full text-center'>
                 <thead>
                     <tr>

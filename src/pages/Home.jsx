@@ -42,8 +42,8 @@ const Home = () => {
             </section>
             <div className="flex gap-8">
 
-                <button onClick={() => setSector('user')}>User Home Sector</button>
-                <button onClick={() => setSector('admin')}>Admin Home Sector</button>
+                <button onClick={() => setSector('user')}>User Home Section</button>
+                <button onClick={() => setSector('admin')}>Admin Home Section</button>
 
             </div>
             {loading && <p>Loading users...</p>}

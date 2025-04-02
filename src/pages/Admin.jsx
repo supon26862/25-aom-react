@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 const Admin = ({ employee, fetchUsers, setError }) => {
 
-    // --------- handle create new entry ------------
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
     const [position, setPosition] = useState('');
@@ -42,7 +41,6 @@ const Admin = ({ employee, fetchUsers, setError }) => {
         setSubmitted(true);
     }
 
-    // --------- handle delete ------------
     const [deleteId, setDeleteId] = useState("");
 
     useEffect(() => {
@@ -70,19 +68,19 @@ const Admin = ({ employee, fetchUsers, setError }) => {
     return (
         <div>
             <form onSubmit={handleSubmit} className='flex gap-8 mb-8'>
-                <input className='bg-white text-sm px-4 py-2 w-60 rounded'
+                <input className='bg-white px-4 py-2 w-60 rounded'
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                     type="text"
                     placeholder='Name'
                 />
-                <input className='bg-white text-sm px-4 py-2 w-60 rounded'
+                <input className='bg-white px-4 py-2 w-60 rounded'
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
                     type="text"
                     placeholder='Last Name'
                 />
-                <input className='bg-white text-sm px-4 py-2 w-60 rounded'
+                <input className='bg-white px-4 py-2 w-60 rounded'
                     onChange={(e) => setPosition(e.target.value)}
                     value={position}
                     type="text"
@@ -91,7 +89,7 @@ const Admin = ({ employee, fetchUsers, setError }) => {
                 <button type="submit">submit</button>
             </form>
 
-            {response && (<p className="mt-2 text-green-600">Created</p>)}
+            {response && (<p className="mt-2">Created</p>)}
 
             <table className='w-3/4 m-auto text-center mb-16'>
                 <thead>
